@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend for batch processing
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
@@ -223,7 +225,7 @@ def plot_results(t: np.ndarray, states: list, trim_alpha: float,
     r = w_B[:, 2]
 
     # Euler angles
-    rpy = np.array([s.att.as_euler() for s in states])  # (n, 3)
+    rpy = np.array([s.att.as_euler('xyz') for s in states])  # (n, 3)
     phi = rpy[:, 0]
     theta = rpy[:, 1]
     psi = rpy[:, 2]
@@ -403,7 +405,7 @@ def main():
     print(f"  - {output_dir / 'ntop_aileron_doublet.png'}")
     print()
 
-    plt.show()
+    # plt.show()  # Disabled for batch execution
 
 
 if __name__ == "__main__":
