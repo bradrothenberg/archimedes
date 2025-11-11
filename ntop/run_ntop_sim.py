@@ -25,12 +25,12 @@ from ntop_vehicle import NTopVehicle, NTopVehicleGeometry
 from archimedes.experimental.aero import ConstantGravity, StandardAtmosphere1976
 
 
-def create_vehicle(data_dir: Path, max_thrust: float = 10000.0) -> NTopVehicle:
+def create_vehicle(data_dir: Path, max_thrust: float = 3600.0) -> NTopVehicle:
     """Create nTop vehicle from data files.
 
     Args:
         data_dir: Directory containing nTop data
-        max_thrust: Maximum thrust [lbf]
+        max_thrust: Maximum thrust [lbf] (default: FJ44-4A)
 
     Returns:
         NTopVehicle instance
@@ -325,26 +325,28 @@ def main():
 
     # Create vehicle
     print("Creating vehicle model...")
-    vehicle = create_vehicle(data_dir, max_thrust=10000.0)
+    vehicle = create_vehicle(data_dir, max_thrust=3600.0)  # Williams FJ44-4A
     print(f"  Mass: {vehicle.m:.2f} slug ({vehicle.m * 32.174:.0f} lbf)")
     print(f"  Wing area: {vehicle.geometry.S:.2f} ft^2")
-    print(f"  Max thrust: {vehicle.max_thrust:.0f} lbf")
+    print(f"  Max thrust: {vehicle.max_thrust:.0f} lbf (Williams FJ44-4A)")
+    print(f"  Thrust/Weight: {vehicle.max_thrust / (vehicle.m * 32.174):.3f}")
     print()
 
-    # Trim condition (use results from trim solver)
-    # Cruise: 250 ft/s @ 20,000 ft, alpha=16.4 deg
+    # Trim condition (from trim solver with FJ44-4A thrust)
+    # Cruise: 250 ft/s @ 20,000 ft
     velocity = 250.0  # ft/s
     altitude = 20000.0  # ft
-    alpha_trim = np.deg2rad(16.4)  # rad
-    elevator_trim = -2.73  # deg
-    throttle_trim = 0.137  # 0-1
+    alpha_trim = np.deg2rad(16.41)  # rad
+    elevator_trim = -3.89  # deg
+    throttle_trim = 0.380  # 0-1
 
-    print("Trim condition:")
+    print("Trim condition (Cruise):")
     print(f"  Velocity: {velocity:.1f} ft/s")
     print(f"  Altitude: {altitude:.0f} ft")
     print(f"  Alpha: {np.rad2deg(alpha_trim):.2f} deg")
     print(f"  Elevator: {elevator_trim:.2f} deg")
-    print(f"  Throttle: {throttle_trim:.3f}")
+    print(f"  Throttle: {throttle_trim:.1%}")
+    print(f"  CL: 0.918, CD: 0.174, L/D: 5.27")
     print()
 
     # Create initial state at trim

@@ -304,7 +304,7 @@ if __name__ == "__main__":
         gravity=ConstantGravity(32.174),
         atmos=StandardAtmosphere1976(),
         xcg=0.25,
-        max_thrust=10000.0,  # High thrust for testing [lbf]
+        max_thrust=3600.0,  # Williams FJ44-4A thrust [lbf]
     )
 
     # Create trim solver
