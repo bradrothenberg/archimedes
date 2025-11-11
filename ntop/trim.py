@@ -340,7 +340,7 @@ if __name__ == "__main__":
     print("Case 3: Approach")
     print("-"*70)
     condition3 = TrimCondition(
-        velocity=150.0,  # ft/s (~89 kts) - slow approach
+        velocity=176.0,  # ft/s (~104 kts) - CL=1.0 approach speed
         altitude=1000.0,  # ft
     )
     trim3 = solver.solve(condition3)
