@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(NUL)",
+      "Bash(python geometry.py:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(avl:*)",
+      "Bash(git add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
