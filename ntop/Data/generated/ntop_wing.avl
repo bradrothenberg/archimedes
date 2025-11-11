@@ -1,0 +1,48 @@
+#=========================================
+# nTop Wing - AVL Geometry File
+# Generated from nTop export data
+#=========================================
+
+nTop Wing
+#Mach
+0.0
+#IYsym   IZsym   Zsym
+0        0       0.0
+#Sref    Cref    Bref
+206.318501    8.298198    24.863047
+#Xref    Yref    Zref
+12.846117    -0.000611    0.043667
+
+#=========================================
+SURFACE
+Wing
+#Nchordwise  Cspace  Nspanwise  Sspace
+10           1.0     20         1.0
+
+COMPONENT
+1
+
+#-----------------------------------------
+SECTION
+#Xle    Yle    Zle    Chord    Ainc
+18.374283  -12.431524  1.306606  0.245539  0.0
+
+NACA
+0012
+
+#-----------------------------------------
+SECTION
+#Xle    Yle    Zle    Chord    Ainc
+0.021935  0.000000  0.000000  22.400771  0.0
+
+NACA
+0012
+
+#-----------------------------------------
+SECTION
+#Xle    Yle    Zle    Chord    Ainc
+18.374283  12.431524  1.306606  0.245539  0.0
+
+NACA
+0012
+

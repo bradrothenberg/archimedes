@@ -1,0 +1,31 @@
+#-------------------------------------------------
+# nTop Wing - AVL Mass File
+#-------------------------------------------------
+# Lunit = ft
+# Munit = slug
+# Tunit = s
+#
+#  g   =  32.17      ft/s^2
+#
+# m   =  mass
+# Ixx,Iyy,Izz,Ixy,Iyz,Izx  =  inertias
+#
+#  xcg,ycg,zcg  =  CG location      (Lunit,  same units as Xle,Yle,Zle)
+#
+#-------------------------------------------------
+Lunit = 1.0 ft
+Munit = 1.0 slug
+Tunit = 1.0 s
+#
+g = 32.17
+rho = 0.001267
+#
+#  Mass
+228.953270
+#
+#  Inertias
+19238.683215  2251.297056  21489.980271
+0.000000  0.000000  0.000000
+#
+#  CG location
+12.846117  -0.000611  0.043667

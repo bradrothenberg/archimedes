@@ -1,0 +1,38 @@
+
+ ===================================================
+  Athena Vortex Lattice  Program      Version  3.52
+  Copyright (C) 2002   Mark Drela, Harold Youngren
+
+  This software comes with ABSOLUTELY NO WARRANTY,
+    subject to the GNU General Public License.
+
+  Caveat computor
+ ===================================================
+
+ ==========================================================
+   Quit    Exit program
+
+  .OPER    Compute operating-point run cases
+  .MODE    Eigenvalue analysis of run cases
+  .TIME    Time-domain calculations
+
+   LOAD f  Read configuration input file
+   MASS f  Read mass distribution file
+   MSHO    Show mass distribution
+   CASE f  Read run case file
+
+   CINI    Clear and initialize run cases
+   MSET i  Apply mass file data to stored run case(s)
+
+  .PLOP    Plotting options
+   NAME s  Specify new configuration name
+
+ AVL   c>  
+ Reading file: ntop_wing.avl  ...
+
+ Configuration: nTop Wing                                                   
+
+   Building surface: Wing                                    
+
+ *** Cannot adjust spanwise spacing at section  2, on surface Wing
+ *** Insufficient number of spanwise vortices to work with

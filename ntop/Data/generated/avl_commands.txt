@@ -1,0 +1,9 @@
+LOAD c:\Users\bradrothenberg\OneDrive - nTop\OUT\parts\nTopAVL\archimedes\ntop\data\generated\ntop_wing.avl
+
+MASS c:\Users\bradrothenberg\OneDrive - nTop\OUT\parts\nTopAVL\archimedes\ntop\data\generated\ntop_wing.mass
+OPER
+A
+A 45.0
+X
+
+QUIT

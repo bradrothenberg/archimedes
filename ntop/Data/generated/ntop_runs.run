@@ -1,0 +1,111 @@
+# AVL Run Cases - Alpha Sweep
+# Generated for nTop wing analysis
+
+ ---------------------------------------------
+ Run case  1:   Alpha = -10.00 deg
+
+ alpha        ->  alpha       =   -10.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  2:   Alpha = -5.00 deg
+
+ alpha        ->  alpha       =   -5.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  3:   Alpha = 0.00 deg
+
+ alpha        ->  alpha       =   0.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  4:   Alpha = 5.00 deg
+
+ alpha        ->  alpha       =   5.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  5:   Alpha = 10.00 deg
+
+ alpha        ->  alpha       =   10.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  6:   Alpha = 15.00 deg
+
+ alpha        ->  alpha       =   15.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  7:   Alpha = 20.00 deg
+
+ alpha        ->  alpha       =   20.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  8:   Alpha = 25.00 deg
+
+ alpha        ->  alpha       =   25.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  9:   Alpha = 30.00 deg
+
+ alpha        ->  alpha       =   30.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  10:   Alpha = 35.00 deg
+
+ alpha        ->  alpha       =   35.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  11:   Alpha = 40.00 deg
+
+ alpha        ->  alpha       =   40.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
+ ---------------------------------------------
+ Run case  12:   Alpha = 45.00 deg
+
+ alpha        ->  alpha       =   45.0000
+ beta         ->  beta        =   0.0000
+ pb/2V        ->  pb/2V       =   0.0000
+ qc/2V        ->  qc/2V       =   0.0000
+ rb/2V        ->  rb/2V       =   0.0000
+
