@@ -1,0 +1,7 @@
+LOAD uav.avl
+MASS uav.mass
+OPER
+a a 4.17
+x
+ST
+quit

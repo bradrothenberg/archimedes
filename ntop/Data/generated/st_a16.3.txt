@@ -1,13 +1,13 @@
  ---------------------------------------------------------------
  Vortex Lattice Output -- Total Forces
 
- Configuration: nTop Wing                                                   
-     # Surfaces =   1
-     # Strips   =  20
-     # Vortices = 200
+ Configuration: nTop Flying Wing                                            
+     # Surfaces =   2
+     # Strips   =  40
+     # Vortices = 480
 
   Sref =  206.32       Cref =  8.2982       Bref =  24.863    
-  Xref =  12.846       Yref =-0.61100E-03   Zref = 0.43667E-01
+  Xref =  12.846       Yref =-0.60000E-03   Zref = 0.43700E-01
 
  Standard axis orientation,  X fwd, Z down         
 
@@ -17,16 +17,17 @@
   Beta  =   0.00000     qc/2V =   0.00000
   Mach  =     0.000     rb/2V =  -0.00000     r'b/2V =  -0.00000
 
-  CXtot =   0.17161     Cltot =  -0.00002     Cl'tot =  -0.00002
-  CYtot =   0.00000     Cmtot =   0.16537
-  CZtot =  -0.91221     Cntot =  -0.00000     Cn'tot =   0.00000
+  CXtot =   0.13942     Cltot =  -0.00002     Cl'tot =  -0.00002
+  CYtot =   0.00000     Cmtot =  -0.07008
+  CZtot =  -0.76695     Cntot =  -0.00000     Cn'tot =   0.00000
 
-  CLtot =   0.92371
-  CDtot =   0.09138
-  CDvis =   0.00000     CDind = 0.0913815
-  CLff  =   0.94208     CDff  = 0.0950529    | Trefftz
-  CYff  =  -0.00000         e =    0.9920    | Plane  
+  CLtot =   0.77524
+  CDtot =   0.08150
+  CDvis =   0.00000     CDind = 0.0815033
+  CLff  =   0.79341     CDff  = 0.0675748    | Trefftz
+  CYff  =   0.00000         e =    0.9897    | Plane  
 
+   flaperon        =   0.00000
 
  ---------------------------------------------------------------
 
@@ -34,22 +35,35 @@
 
                              alpha                beta
                   ----------------    ----------------
- z' force CL |    CLa =   3.003749    CLb =  -0.000000
- y  force CY |    CYa =   0.000000    CYb =   0.001738
- x  force CD |    CDa =   0.606452    CDb =  -0.000000
- x' mom.  Cl'|    Cla =  -0.000074    Clb =  -0.235755
- y  mom.  Cm |    Cma =   0.476201    Cmb =  -0.000000
- z' mom.  Cn'|    Cna =   0.000015    Cnb =   0.041597
+ z' force CL |    CLa =   2.506765    CLb =  -0.000000
+ y  force CY |    CYa =   0.000000    CYb =  -0.016911
+ x  force CD |    CDa =   0.539115    CDb =  -0.000000
+ x' mom.  Cl'|    Cla =  -0.000060    Clb =  -0.168937
+ y  mom.  Cm |    Cma =  -0.262329    Cmb =  -0.000000
+ z' mom.  Cn'|    Cna =   0.000013    Cnb =   0.024200
 
                      roll rate  p'      pitch rate  q'        yaw rate  r'
                   ----------------    ----------------    ----------------
- z' force CL |    CLp =   0.000152    CLq =   3.997064    CLr =  -0.000091
- y  force CY |    CYp =   0.458322    CYq =   0.000000    CYr =  -0.097365
- x  force CD |    CDp =  -0.000016    CDq =   1.191403    CDr =  -0.000009
- x' mom.  Cl'|    Clp =  -0.209938    Clq =  -0.000098    Clr =   0.180639
- y  mom.  Cm |    Cmp =   0.000023    Cmq =  -1.761386    Cmr =  -0.000016
- z' mom.  Cn'|    Cnp =  -0.061446    Cnq =   0.000029    Cnr =  -0.017353
+ z' force CL |    CLp =   0.000125    CLq =   3.495225    CLr =  -0.000075
+ y  force CY |    CYp =   0.271898    CYq =   0.000000    CYr =  -0.049849
+ x  force CD |    CDp =  -0.000011    CDq =   0.587358    CDr =  -0.000008
+ x' mom.  Cl'|    Clp =  -0.193530    Clq =  -0.000084    Clr =   0.176875
+ y  mom.  Cm |    Cmp =  -0.000013    Cmq =  -1.421227    Cmr =   0.000007
+ z' mom.  Cn'|    Cnp =  -0.071931    Cnq =   0.000014    Cnr =  -0.014064
 
- Neutral point  Xnp =  11.530558
+                  flaperon     d01 
+                  ----------------
+ z' force CL |   CLd01 =  -0.000000
+ y  force CY |   CYd01 =   0.000004
+ x  force CD |   CDd01 =   0.000000
+ x' mom.  Cl'|   Cld01 =  -0.000040
+ y  mom.  Cm |   Cmd01 =   0.000000
+ z' mom.  Cn'|   Cnd01 =   0.000006
+ Trefftz drag| CDffd01 =   0.000000
+ span eff.   |    ed01 =  -0.000000
 
- Clb Cnr / Clr Cnb  =   0.544455    (  > 1 if spirally stable )
+
+
+ Neutral point  Xnp =  13.714492
+
+ Clb Cnr / Clr Cnb  =   0.555078    (  > 1 if spirally stable )

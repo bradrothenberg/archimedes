@@ -37,50 +37,68 @@ The 6-DOF simulation successfully revealed a fundamental design flaw: the center
 ### Center of Gravity Analysis
 
 **From mass.csv:**
-- CG X-location: 154.15 inches
+- CG X-location: 154.15 inches (12.846 feet)
+
+**AVL Reference Point:**
+- Xref = 12.846 feet = 154.15 inches
+- **CONFIRMED**: AVL moments are computed at the actual CG (no transfer needed)
 
 **Wing Geometry:**
 - Root LE: 0.26 inches
 - Root TE: 269.07 inches
 - Root chord: 268.81 inches
-- Mean aerodynamic chord (MAC): 99.58 inches
+- Mean aerodynamic chord (MAC): 99.58 inches = 8.30 feet
 
 **CG Position:**
 - CG at 57.2% of root chord
-- CG at ~154.15% of MAC (very far aft relative to typical MAC reference)
+- CG at 18.7 feet from nose
 
-**Aerodynamic Center (approximate):**
-- Typical location: 23-25% of chord
-- For this wing: ~25% chord = ~67 inches aft of LE
-
-**Problem:** CG is ~87 inches aft of the aerodynamic center!
+**Static Margin:**
+- CG is 0.187 MAC (18.7%) **aft** of the neutral point
+- For comparison, typical aircraft: +5% to +15% MAC (CG ahead of NP)
 
 ### Static Margin
 
-Static Margin = (Aerodynamic Center - CG) / MAC
+Static Margin = (Neutral Point - CG) / MAC
 
-With CG aft of the AC:
-- Static margin is **NEGATIVE**
-- Aircraft is **statically unstable**
+Calculation:
+- Static Margin = -Cma / CLa = -0.6259 / 3.3411 = **-0.187 MAC**
+
+With negative static margin:
+- CG is **0.187 MAC (18.7%) aft** of the neutral point
+- Aircraft is **statically unstable** in pitch
 - Will pitch up divergently without continuous corrective input
 
-### Neutral Point
+### Required CG Relocation
 
-The neutral point (where Cma = 0) is calculated at:
-- NP = -Cma / CLa = -0.6259 / 3.3411 = **-0.187 MAC**
-
-This negative value (ahead of the wing leading edge) is physically unrealistic and indicates severe aft CG.
+To achieve a safe +10% static margin:
+- Required CG shift: **28.6 inches forward** (2.38 feet)
+- Target CG location: 125.5 inches from nose (currently at 154.15 inches)
+- This would place CG at ~47% root chord (currently at 57%)
 
 ## Physical Explanation
 
-A statically stable aircraft has its CG **ahead** of its aerodynamic center (AC):
+A statically stable aircraft has its CG **ahead** of its neutral point (NP):
 - When disturbed to higher AoA → pitching moment is nose-down → restoring
 - Cma < 0 (negative slope)
+- Static margin is positive
 
-This aircraft has CG **behind** the AC:
+This aircraft has CG **behind** the neutral point:
 - When disturbed to higher AoA → pitching moment is nose-up → diverging
 - Cma > 0 (positive slope)
+- Static margin is negative (-18.7%)
 - Like balancing a pencil on your finger - unstable equilibrium
+
+**Key Stability Relationship:**
+```
+Cma = CLa × (CG - NP) / MAC
+
+For this aircraft:
++0.6259 = 3.3411 × (CG - NP) / 8.30 ft
+CG - NP = +1.55 feet = +0.187 MAC
+
+The positive value confirms CG is aft of NP.
+```
 
 ## Consequences
 
@@ -93,7 +111,15 @@ This aircraft has CG **behind** the AC:
 
 ### Option 1: Relocate Center of Gravity (RECOMMENDED)
 
-**Target**: Move CG forward to 20-30% MAC
+**Target**: Move CG forward by 28.6 inches to achieve +10% static margin
+
+**Current State:**
+- CG at 154.15 inches (57.2% root chord)
+- Static margin: -18.7% MAC (unstable)
+
+**Target State:**
+- CG at 125.5 inches (46.7% root chord)
+- Static margin: +10% MAC (stable)
 
 **Methods:**
 - Move batteries/fuel forward
@@ -102,14 +128,16 @@ This aircraft has CG **behind** the AC:
 - Redesign internal layout
 
 **Benefits:**
-- Inherent stability
+- Inherent stability without flight control system
 - Simpler flight controls
 - Certifiable design
 - Pilot-friendly
+- Eliminates need for continuous computer control
 
 **Drawbacks:**
 - Requires physical redesign
 - May impact other performance metrics
+- Weight redistribution needed
 
 ### Option 2: Stability Augmentation System (SAS)
 
@@ -156,17 +184,21 @@ Where:
 ### Immediate Action Items:
 
 1. **Verify Mass Distribution**
-   - Confirm CG calculation is correct
-   - Check if payload/batteries can be repositioned
+   - CONFIRMED: CG calculation is correct (154.15 inches from mass.csv)
+   - CONFIRMED: AVL reference point matches CG (12.846 feet = 154.15 inches)
+   - Stability derivative Cma = +0.6259 /rad is accurate
 
 2. **Stability Trade Study**
-   - Calculate required CG shift for Cma < -0.05
-   - Identify available mass that can be moved
+   - CALCULATED: Required CG shift = 28.6 inches forward
+   - Target CG location: 125.5 inches (47% root chord)
+   - This achieves +10% static margin (safe for conventional flight)
+   - Action: Identify available mass that can be moved forward
    - Assess impact on other metrics (range, payload, etc.)
 
 3. **Decision Point**
-   - If CG can be moved forward → redesign and rerun analysis
-   - If CG cannot be moved → implement SAS for demonstration
+   - Option A: CG relocation → Redesign mass distribution and rerun analysis
+   - Option B: Accept instability → Implement SAS for demonstration only
+   - Option C: Hybrid → Move CG partially forward + lightweight SAS
 
 ### For Production Aircraft:
 

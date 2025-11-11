@@ -1,0 +1,14 @@
+#-------------------------------------------------
+# nTop Flying Wing - AVL Run Case
+# Cruise: 20000 ft, 287 KTAS
+#-------------------------------------------------
+
+# Run case 1: Cruise
+ ---------------------------------------------
+ Run case  1:   Cruise
+
+ alpha        ->  alpha       =   4.17    deg
+ beta         ->  beta        =   0.0     deg
+ pb/2V        ->  pb/2V       =   0.0
+ qc/2V        ->  qc/2V       =   0.0
+ rb/2V        ->  rb/2V       =   0.0

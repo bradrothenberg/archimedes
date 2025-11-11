@@ -11,7 +11,9 @@
       "Bash(git commit:*)",
       "Bash(cat:*)",
       "Bash(tee:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(sim_errors.txt)",
+      "Bash(timeout 120 python:*)"
     ],
     "deny": [],
     "ask": []

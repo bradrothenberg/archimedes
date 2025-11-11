@@ -1,0 +1,8 @@
+LOAD uav.avl
+OPER
+A A 4.17
+X
+ST
+
+
+QUIT
