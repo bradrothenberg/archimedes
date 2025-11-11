@@ -11,23 +11,27 @@ import pandas as pd
 from aero_deck import AeroDeck
 
 
-def update_aero_deck_from_avl(avl_csv_path: Path, output_path: Path):
-    """Update aero deck with real AVL data from alpha sweep.
+def update_aero_deck_from_avl(avl_csv_path: Path, elevon_csv_path: Path, output_path: Path):
+    """Update aero deck with real AVL data from alpha sweep and elevon sweep.
 
     Args:
         avl_csv_path: Path to avl_alpha_sweep.csv
+        elevon_csv_path: Path to avl_elevon_sweep.csv
         output_path: Path to save updated ntop_aero_deck.npz
     """
     print("="*70)
-    print("Updating Aero Deck with AVL Data")
+    print("Updating Aero Deck with AVL Data + Elevon Control Derivatives")
     print("="*70)
     print(f"Loading AVL data from: {avl_csv_path}")
+    print(f"Loading elevon data from: {elevon_csv_path}")
 
     # Load AVL data
     df = pd.read_csv(avl_csv_path)
+    df_elevon = pd.read_csv(elevon_csv_path)
 
-    print(f"Loaded {len(df)} data points")
+    print(f"Loaded {len(df)} alpha sweep data points")
     print(f"Alpha range: {df['alpha'].min():.1f}° to {df['alpha'].max():.1f}°")
+    print(f"Loaded {len(df_elevon)} elevon sweep data points")
     print()
 
     # Extract alpha vector
@@ -63,9 +67,33 @@ def update_aero_deck_from_avl(avl_csv_path: Path, output_path: Path):
     CX = df['CX'].values
     CZ = df['CZ'].values
 
-    # Cx data: for now, no elevator effect (would need AVL runs with elevator)
-    # Just replicate CX for each elevator setting
-    cx_data = np.tile(CX[:, np.newaxis], (1, n_elev))
+    # Cx data: add elevon (elevator mode) effect from sweep data
+    # Extract dCx/de from symmetric elevon data
+    df_sym = df_elevon[df_elevon['elevon_mode'] == 'symmetric']
+
+    # Extract dCx/de at the elevon sweep alphas, then interpolate
+    elevon_alphas = sorted(df_sym['alpha'].unique())
+    dCx_de_at_elevon_alphas = []
+
+    for alpha in elevon_alphas:
+        df_alpha = df_sym[df_sym['alpha'] == alpha]
+        if len(df_alpha) > 1:
+            elevon_def = df_alpha['elevon_L'].values
+            CX_vals = df_alpha['CX'].values
+            dCx_de = np.polyfit(elevon_def, CX_vals, 1)[0]
+        else:
+            dCx_de = 0.0
+        dCx_de_at_elevon_alphas.append(dCx_de)
+
+    # Interpolate to full alpha vector
+    dCx_de_values = np.interp(alpha_vector, elevon_alphas, dCx_de_at_elevon_alphas)
+
+    # Build cx_data as function of (alpha, elevator)
+    # CX(alpha, elev) = CX_base(alpha) + dCx_de(alpha) * elev
+    cx_data = np.zeros((n_alpha, n_elev))
+    for i in range(n_alpha):
+        for j in range(n_elev):
+            cx_data[i, j] = CX[i] + dCx_de_values[i] * elevator_vector[j]
 
     # Cy data: only indexed by beta (not alpha)
     # cy_data shape should be (n_beta,) = (2,)
@@ -84,10 +112,30 @@ def update_aero_deck_from_avl(avl_csv_path: Path, output_path: Path):
     for i in range(n_alpha):
         cl_data[i, :] = Clb[i] * beta_vector
 
-    # Pitching moment: replicate for each elevator setting
+    # Pitching moment: add elevon (elevator mode) control effectiveness
     # cm_data needs shape (n_alpha, n_elev)
     Cm = df['Cm'].values
-    cm_data = np.tile(Cm[:, np.newaxis], (1, n_elev))
+
+    # Extract dCm/de at elevon sweep alphas, then interpolate
+    dCm_de_at_elevon_alphas = []
+    for alpha in elevon_alphas:
+        df_alpha = df_sym[df_sym['alpha'] == alpha]
+        if len(df_alpha) > 1:
+            elevon_def = df_alpha['elevon_L'].values
+            Cm_vals = df_alpha['Cm'].values
+            dCm_de = np.polyfit(elevon_def, Cm_vals, 1)[0]
+        else:
+            dCm_de = 0.0
+        dCm_de_at_elevon_alphas.append(dCm_de)
+
+    # Interpolate to full alpha vector
+    dCm_de_values = np.interp(alpha_vector, elevon_alphas, dCm_de_at_elevon_alphas)
+
+    # Build cm_data: Cm(alpha, elev) = Cm_base(alpha) + dCm_de(alpha) * elev
+    cm_data = np.zeros((n_alpha, n_elev))
+    for i in range(n_alpha):
+        for j in range(n_elev):
+            cm_data[i, j] = Cm[i] + dCm_de_values[i] * elevator_vector[j]
 
     # Yawing moment: shape (n_alpha, n_beta) = (24, 2)
     # Use Cnb to estimate: Cn ≈ Cnb * beta
@@ -119,12 +167,42 @@ def update_aero_deck_from_avl(avl_csv_path: Path, output_path: Path):
     cyr_data = np.zeros(n_alpha)  # AVL doesn't output Cyr directly
 
     # Control derivatives (function of alpha, beta)
-    # We don't have control surfaces in AVL model yet, so use placeholder
-    # These should come from AVL runs with control deflections
-    # Shape should be (n_alpha, n_beta) = (24, 2)
-    dlda_data = np.full((n_alpha, n_beta), -0.05)  # Roll due to aileron
+    # Extract from antisymmetric elevon data (roll control)
+    df_anti = df_elevon[df_elevon['elevon_mode'] == 'antisymmetric']
+
+    # dCl/da (roll control) - elevon differential creates rolling moment
+    # Extract at elevon alphas, then interpolate
+    dCl_da_at_elevon_alphas = []
+    dCn_da_at_elevon_alphas = []
+
+    for alpha in elevon_alphas:
+        df_alpha = df_anti[df_anti['alpha'] == alpha]
+        if len(df_alpha) > 1:
+            # Elevon differential = 2 * elevon_L (since R = -L)
+            elevon_diff = 2 * df_alpha['elevon_L'].values
+            Cl_vals = df_alpha['Cl'].values
+            Cn_vals = df_alpha['Cn'].values
+            dCl_da = np.polyfit(elevon_diff, Cl_vals, 1)[0]
+            dCn_da = np.polyfit(elevon_diff, Cn_vals, 1)[0]
+        else:
+            dCl_da = 0.0015  # Default
+            dCn_da = 0.0
+        dCl_da_at_elevon_alphas.append(dCl_da)
+        dCn_da_at_elevon_alphas.append(dCn_da)
+
+    # Interpolate to full alpha vector
+    dCl_da_values = np.interp(alpha_vector, elevon_alphas, dCl_da_at_elevon_alphas)
+    dCn_da_values = np.interp(alpha_vector, elevon_alphas, dCn_da_at_elevon_alphas)
+
+    # Shape (n_alpha, n_beta) = (24, 2)
+    dlda_data = np.zeros((n_alpha, n_beta))
+    dnda_data = np.zeros((n_alpha, n_beta))
+    for i in range(n_alpha):
+        dlda_data[i, :] = dCl_da_values[i]
+        dnda_data[i, :] = dCn_da_values[i]
+
+    # Rudder derivatives: placeholder (no rudder in current model)
     dldr_data = np.full((n_alpha, n_beta), 0.01)   # Roll due to rudder
-    dnda_data = np.full((n_alpha, n_beta), -0.002) # Adverse yaw
     dndr_data = np.full((n_alpha, n_beta), -0.08)  # Yaw due to rudder
 
     print("Creating AeroDeck object...")
@@ -182,12 +260,18 @@ def update_aero_deck_from_avl(avl_csv_path: Path, output_path: Path):
     print(f"  Clp = {clp_data[idx_5deg]:.3f} /rad")
     print(f"  Cnr = {cnr_data[idx_5deg]:.3f} /rad")
     print()
+    print("Control effectiveness (at alpha=5°):")
+    idx_5deg = np.argmin(np.abs(alpha_vector - 5.0))
+    print(f"  dCm/de = {dCm_de_values[idx_5deg]:.4f} /deg (pitch)")
+    print(f"  dCl/da = {dlda_data[idx_5deg, 0]:.4f} /deg (roll)")
+    print()
     print("Notes:")
     print("  - Force/moment coefficients are from AVL (inviscid)")
     print("  - Stability derivatives extracted from AVL output")
     print("  - Lateral coefficients estimated from stability derivatives (CYb, Clb, Cnb)")
-    print("  - Control derivatives are placeholders (need AVL runs with controls)")
+    print("  - Control derivatives from elevon sweep (pitch & roll control)")
     print("  - Full beta sweep not yet run (using linearized approximation)")
+    print("  - Rudder derivatives are placeholder (no rudder in current model)")
     print()
     print("="*70)
     print("SUCCESS! Aero deck updated with real AVL data")
@@ -206,7 +290,8 @@ if __name__ == "__main__":
     # Paths
     data_dir = Path(__file__).parent / "data" / "generated"
     avl_csv = data_dir / "avl_alpha_sweep.csv"
+    elevon_csv = data_dir / "avl_elevon_sweep.csv"
     output_npz = data_dir / "ntop_aero_deck.npz"
 
     # Update aero deck
-    aero_deck = update_aero_deck_from_avl(avl_csv, output_npz)
+    aero_deck = update_aero_deck_from_avl(avl_csv, elevon_csv, output_npz)

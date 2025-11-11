@@ -1,0 +1,15 @@
+LOAD ntop_wing.avl
+
+MASS ntop_wing.mass
+OPER
+A
+A 5
+D1
+D1 10
+D2
+D2 10
+X
+FT
+test_sym_ft.txt
+
+QUIT

@@ -1,0 +1,17 @@
+LOAD ntop_wing.avl
+
+MASS ntop_wing.mass
+OPER
+A
+A 0
+D1
+D1 5.0
+D2
+D2 -5.0
+X
+FT
+ft_anti_a0.0_e5.0.txt
+ST
+st_anti_a0.0_e5.0.txt
+
+QUIT
