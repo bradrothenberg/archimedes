@@ -30,6 +30,22 @@ SECTION
 NACA
 0012
 
+CONTROL
+#name    gain   Xhinge  HingeVec  SgnDup
+elevon_L  1.0    0.75    0. 0. 0.  -1.0
+
+#-----------------------------------------
+SECTION
+#Xle    Yle    Zle    Chord    Ainc
+9.198109  -6.215762  0.653303  11.323155  0.0
+
+NACA
+0012
+
+CONTROL
+#name    gain   Xhinge  HingeVec  SgnDup
+elevon_L  1.0    0.75    0. 0. 0.  -1.0
+
 #-----------------------------------------
 SECTION
 #Xle    Yle    Zle    Chord    Ainc
@@ -41,8 +57,24 @@ NACA
 #-----------------------------------------
 SECTION
 #Xle    Yle    Zle    Chord    Ainc
+9.198109  6.215762  0.653303  11.323155  0.0
+
+NACA
+0012
+
+CONTROL
+#name    gain   Xhinge  HingeVec  SgnDup
+elevon_R  1.0    0.75    0. 0. 0.  -1.0
+
+#-----------------------------------------
+SECTION
+#Xle    Yle    Zle    Chord    Ainc
 18.374283  12.431524  1.306606  0.245539  0.0
 
 NACA
 0012
+
+CONTROL
+#name    gain   Xhinge  HingeVec  SgnDup
+elevon_R  1.0    0.75    0. 0. 0.  -1.0
 
