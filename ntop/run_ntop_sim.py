@@ -333,20 +333,20 @@ def main():
     print()
 
     # Trim condition (from trim solver with FJ44-4A thrust)
-    # Cruise: 250 ft/s @ 20,000 ft
-    velocity = 250.0  # ft/s
+    # High altitude cruise: 484 ft/s @ 20,000 ft (~286 knots)
+    velocity = 484.0  # ft/s
     altitude = 20000.0  # ft
-    alpha_trim = np.deg2rad(16.41)  # rad
-    elevator_trim = -3.89  # deg
-    throttle_trim = 0.380  # 0-1
+    alpha_trim = np.deg2rad(4.17)  # rad
+    elevator_trim = 0.33  # deg
+    throttle_trim = 0.096  # 0-1
 
-    print("Trim condition (Cruise):")
-    print(f"  Velocity: {velocity:.1f} ft/s")
+    print("Trim condition (High Altitude Cruise):")
+    print(f"  Velocity: {velocity:.1f} ft/s ({velocity*0.592:.0f} knots)")
     print(f"  Altitude: {altitude:.0f} ft")
     print(f"  Alpha: {np.rad2deg(alpha_trim):.2f} deg")
     print(f"  Elevator: {elevator_trim:.2f} deg")
     print(f"  Throttle: {throttle_trim:.1%}")
-    print(f"  CL: 0.918, CD: 0.174, L/D: 5.27")
+    print(f"  CL: 0.244, CD: 0.012, L/D: 20.73")
     print()
 
     # Create initial state at trim

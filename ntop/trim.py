@@ -316,31 +316,31 @@ if __name__ == "__main__":
     print("="*70)
     print()
 
-    # Case 1: Cruise at 20,000 ft, 250 ft/s
-    print("Case 1: Cruise")
+    # Case 1: High altitude cruise at efficient CL
+    print("Case 1: High Altitude Cruise (20,000 ft)")
     print("-"*70)
     condition1 = TrimCondition(
-        velocity=250.0,  # ft/s (~150 kts)
+        velocity=484.0,  # ft/s (~286 kts) - for CL~0.25 at 20k ft
         altitude=20000.0,  # ft
     )
     trim1 = solver.solve(condition1)
     print()
 
-    # Case 2: Low altitude cruise, 200 ft/s
-    print("Case 2: Low Altitude Cruise")
+    # Case 2: Sea level cruise
+    print("Case 2: Sea Level Cruise")
     print("-"*70)
     condition2 = TrimCondition(
-        velocity=200.0,  # ft/s (~120 kts)
-        altitude=5000.0,  # ft
+        velocity=347.0,  # ft/s (~205 kts) - for CL~0.25 at sea level
+        altitude=0.0,  # ft
     )
     trim2 = solver.solve(condition2)
     print()
 
-    # Case 3: Approach/Landing, 150 ft/s
+    # Case 3: Approach/Landing
     print("Case 3: Approach")
     print("-"*70)
     condition3 = TrimCondition(
-        velocity=150.0,  # ft/s (~90 kts)
+        velocity=150.0,  # ft/s (~89 kts) - slow approach
         altitude=1000.0,  # ft
     )
     trim3 = solver.solve(condition3)
