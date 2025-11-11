@@ -8,7 +8,9 @@
       "Bash(avl:*)",
       "Bash(git add:*)",
       "Bash(git checkout:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(cat:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

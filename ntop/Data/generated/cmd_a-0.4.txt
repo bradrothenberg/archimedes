@@ -1,0 +1,15 @@
+LOAD ntop_wing.avl
+
+MASS ntop_wing.mass
+OPER
+A
+A -0.43478260869565233
+B
+B 0.0
+X
+FT
+ft_a-0.4.txt
+ST
+st_a-0.4.txt
+
+QUIT
