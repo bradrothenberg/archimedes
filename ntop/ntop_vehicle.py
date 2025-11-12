@@ -19,7 +19,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import archimedes as arc
 from archimedes import field, struct
-from archimedes.experimental.aero import ConstantGravity, StandardAtmosphere1976
+from archimedes.experimental.aero import ConstantGravity
+from archimedes.experimental.aero.atmosphere_us import StandardAtmosphere1976
 from archimedes.spatial import RigidBody
 
 from aero_deck import AeroDeck

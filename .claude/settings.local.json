@@ -13,7 +13,9 @@
       "Bash(tee:*)",
       "Bash(git push:*)",
       "Bash(sim_errors.txt)",
-      "Bash(timeout 120 python:*)"
+      "Bash(timeout 120 python:*)",
+      "Bash(dir:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

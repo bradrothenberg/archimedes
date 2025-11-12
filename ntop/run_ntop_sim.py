@@ -24,7 +24,8 @@ from geometry import WingGeometry, MassProperties
 from aero_deck import AeroDeck
 from ntop_aero import NTopAero
 from ntop_vehicle import NTopVehicle, NTopVehicleGeometry
-from archimedes.experimental.aero import ConstantGravity, StandardAtmosphere1976
+from archimedes.experimental.aero import ConstantGravity
+from archimedes.experimental.aero.atmosphere_us import StandardAtmosphere1976
 
 
 def create_vehicle(data_dir: Path, max_thrust: float = 3600.0) -> NTopVehicle:
